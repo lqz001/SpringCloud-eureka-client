@@ -1,5 +1,8 @@
 package cowboy.springboot.controller;
 
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cowboy.hello_service_api.model.User;
@@ -15,19 +18,19 @@ public class HelloController4Api implements HelloService{
 	}
 
 	@Override
-	public String hello(String name) {
+	public String hello(@RequestParam("name") String name) {
 		System.out.println("hello1");
 		return "Hello "+name;
 	}
 
 	@Override
-	public String HelloById(Integer id) {
+	public String HelloById(@RequestParam("id") Integer id) {
 		System.out.println("hello2");
 		return "Hello by Id"+id;
 	}
 
 	@Override
-	public User hello(String name, Integer age) {
+	public User hello(@RequestHeader("name") String name, @RequestHeader("age") Integer age) {
 		System.out.println("hello3");
 		return new User(name,age);
 	}
@@ -39,7 +42,7 @@ public class HelloController4Api implements HelloService{
 	}
 
 	@Override
-	public User getUserByName(String name) {
+	public User getUserByName(@PathVariable("name") String name) {
 		System.out.println("getByName");
 		return new User(name,13);
 	}
